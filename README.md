@@ -1,4 +1,4 @@
-# typescript-snake
+<h1>typescript-snake</h1>
 
 ## Patterns
 
