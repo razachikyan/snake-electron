@@ -1,4 +1,6 @@
-<h1 align="center">Snake 🐍</h1>
+<h1 align="center" color="blue">Snake 🐍</h1>
+
+<h4 align="center"></h4>
 
 ## Patterns
 
