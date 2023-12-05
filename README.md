@@ -1,4 +1,4 @@
-<h1>typescript-snake</h1>
+<h1 align="center">Snake 🐍</h1>
 
 ## Patterns
 
