@@ -1,4 +1,3 @@
-// main.ts
 import { app, BrowserWindow } from "electron";
 import { GameController } from "./controllers/GameController";
 
