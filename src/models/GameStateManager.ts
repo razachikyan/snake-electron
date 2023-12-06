@@ -1,4 +1,3 @@
-// models/GameStateManager.ts
 export class GameStateManager {
   private currentState: GameState;
   constructor () {
