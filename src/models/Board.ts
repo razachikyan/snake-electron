@@ -1,42 +1,16 @@
-import { Snake } from "./Snake";
-
 export class Board {
-  canvas: HTMLCanvasElement;
-  context: CanvasRenderingContext2D; // Declare as nullable to handle null return
-  snake: Snake;
-  constructor(canvasId: string, initialSnakeX: number, initialSnakeY: number) {
-    this.canvas = document.getElementById(canvasId) as HTMLCanvasElement;
-    const context = this.canvas.getContext("2d"); // Get the context
+  private readonly width: number;
+  private readonly height: number;
 
-    if (context) {
-      this.context = context; // Assign only if context is not null
-    } else {
-      throw new Error("2D context not supported or canvas element not found.");
-    }
-
-    // Create an instance of the Snake class
-    this.snake = new Snake(initialSnakeX, initialSnakeY);
+  constructor(width: number, height: number) {
+    this.width = width;
+    this.height = height;
   }
+  render(context: CanvasRenderingContext2D): void {
+    // Rendering logic for the game board
 
-  init(): void {
-    // Initialize game setup, event listeners, etc.
-    // For instance, you might initialize the game loop here
-    this.gameLoop();
-  }
-
-  gameLoop(): void {
-    // Implement the game loop here
-    // Update game state, handle input, render, etc.
-
-    // Example: Clear canvas and render the snake
-    this.clearCanvas();
-    this.snake.render(this.context);
-
-    // Request next frame
-    requestAnimationFrame(() => this.gameLoop());
-  }
-
-  clearCanvas(): void {
-    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    // For example, drawing a border or background
+    context.fillStyle = "black";
+    context.fillRect(0, 0, this.width, this.height);
   }
 }
