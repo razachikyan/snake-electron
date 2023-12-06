@@ -1,10 +1,10 @@
-import { TSnakeBody, TSnakeItem, Directions } from "../types";
+import { TSnakeBody, Entity, Directions } from "../types";
 import { detectCollision } from "../utils/detectCollision";
 
 export class Snake {
   body: TSnakeBody;
   direction: Directions;
-  headPosition: TSnakeItem;
+  headPosition: Entity;
   length: number;
 
   constructor(initialX: number, initialY: number) {

@@ -1,10 +1,5 @@
-export type TSnakeBody = Array<TSnakeItem>;
-export type TSnakeItem = {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-};
+export type TSnakeBody = Array<Entity>;
+
 
 export enum Directions {
   up = "up",
