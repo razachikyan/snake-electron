@@ -1,20 +1,20 @@
-import { TSnakeBody, TSnakeItem, Directions } from "../types";
+import { TSnakeBody, Entity, Directions } from "../types";
 import { detectCollision } from "../utils/detectCollision";
 
 export class Snake {
-  body: TSnakeBody;
-  direction: Directions;
-  headPosition: TSnakeItem;
-  length: number;
+  private body: TSnakeBody;
+  private direction: Directions;
+  private headPosition: Entity;
+  private length: number;
 
   constructor(initialX: number, initialY: number) {
     this.body = [{ x: initialX, y: initialY, height: 20, width: 20 }];
-    this.direction = Directions.right; // Initial direction
+    this.direction = Directions.right;
     this.headPosition = { x: initialX, y: initialY, height: 20, width: 20 };
-    this.length = 1; // Initial length
+    this.length = 1;
   }
 
-  move(): void {
+  public move(): void {
     switch (this.direction) {
       case Directions.up:
         this.headPosition.y -= 1;
@@ -42,7 +42,7 @@ export class Snake {
     this.body.pop();
   }
 
-  grow(): void {
+  public grow(): void {
     const lastSegment = this.body[this.body.length - 1];
     const newSegment = {
       x: lastSegment.x,
@@ -53,7 +53,7 @@ export class Snake {
     this.body.push(newSegment);
   }
 
-  changeDirection(newDirection: Directions): void {
+  public changeDirection(newDirection: Directions): void {
     if (Directions[newDirection]) {
       this.direction = Directions[newDirection] as Directions;
     } else {
@@ -61,7 +61,7 @@ export class Snake {
     }
   }
 
-  checkCollision(): boolean {
+  public checkCollision(): boolean {
     for (let i = 1; i < this.body.length; i++) {
       if (detectCollision(this.body[0], this.body[i])) {
         return true;
@@ -70,7 +70,7 @@ export class Snake {
     return false;
   }
 
-  render(context: CanvasRenderingContext2D): void {
+  public render(context: CanvasRenderingContext2D): void {
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 
     context.fillStyle = "green";
