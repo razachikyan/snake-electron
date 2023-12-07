@@ -6,63 +6,58 @@ import { Food } from "../models/Food";
 
 import { GameView } from "../views/GameView";
 import { GameObjectFactory } from "../factories/GameObjectFactory";
+import { Obstacle } from "../models/Obstacle";
+import { detectCollision } from "../utils/detectCollision";
 
 export class GameController {
   // private gameView: GameView;
   private snake: Snake;
   private board: Board;
   private food: Food;
+  private obstacles: Obstacle[];
+  private intervalKey: NodeJS.Timeout | null;
+  private gameView: GameView;
 
-  constructor(private mainWindow: BrowserWindow) {
+  constructor(level: number) {
     this.snake = GameObjectFactory.createSnake();
     this.board = GameObjectFactory.createBoard(800, 600);
     this.food = GameObjectFactory.createFood();
-    // this.gameView = new GameView(mainWindow, this.gameStateManager);
+    this.intervalKey = null;
+    this.obstacles = GameObjectFactory.createObstacle(level);
+    this.gameView = new GameView([this.board, this.snake, ...this.obstacles]);
   }
   startGame() {
-    this.gameStateManager.startGame();
-    this.gameView.render();
-    this.startRendering();
+    this.intervalKey = setInterval(() => {
+      detectCollision(this.snake, [
+        ...this.obstacles.map((item) => item.getEntity()),
+        this.food.getEntity(),
+      ]);
+      this.gameView.render();
+    }, 400);
   }
 
-  private startRendering() {
-    const renderLoop = () => {
-      this.board.render(this.gameView.getContext());
-      this.snake.render(this.gameView.getContext());
-
-      requestAnimationFrame(renderLoop);
-    };
-
-    requestAnimationFrame(renderLoop);
+  stop() {
+    if (this.intervalKey) clearInterval(this.intervalKey);
   }
+
   initializeKeyHandlers() {
     document.addEventListener("keydown", (event) => {
       switch (event.key) {
         case "ArrowUp":
-          // Logic for moving the snake up
-          // For example: this.gameStateManager.moveSnakeUp();
+          this.snake.changeDirection("up");
           break;
         case "ArrowDown":
-          // Logic for moving the snake down
-          // For example: this.gameStateManager.moveSnakeDown();
+          this.snake.changeDirection("down");
           break;
         case "ArrowLeft":
-          // Logic for moving the snake left
-          // For example: this.gameStateManager.moveSnakeLeft();
+          this.snake.changeDirection("left");
           break;
         case "ArrowRight":
-          // Logic for moving the snake right
-          // For example: this.gameStateManager.moveSnakeRight();
+          this.snake.changeDirection("right");
           break;
         default:
-          // Handle other key presses if needed
           break;
       }
     });
-  }
-
-  initializeGame() {
-    this.gameStateManager.startGame();
-    this.startRendering();
   }
 }

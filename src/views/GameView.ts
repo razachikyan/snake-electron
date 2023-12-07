@@ -1,16 +1,27 @@
+import { GameModel } from "../models/GameModel";
+
 // views/GameView.ts
-import { BrowserWindow } from "electron";
-import { GameStateManager } from "../models/GameStateManager";
-
 export class GameView {
-  constructor(
-    private mainWindow: BrowserWindow,
-    private gameStateManager: GameStateManager
-  ) {}
-
-  render() {
-    // Implement rendering logic, handle updates based on game state
+  private ctx: CanvasRenderingContext2D | null;
+  private models: Array<GameModel>;
+  constructor(models: GameModel[]) {
+    this.models = models;
+    const canvas: HTMLCanvasElement | null = document.querySelector("canvas");
+    canvas ? (this.ctx = canvas.getContext("2d")) : (this.ctx = null);
   }
 
-  // Other view-related methods
+  public render() {
+    if (this.ctx !== null) {
+      this.clear();
+      this.models.forEach((model) => {
+        model.render(this.ctx as CanvasRenderingContext2D);
+      });
+    }
+  }
+
+  private clear() {
+    if (this.ctx !== null) {
+      this.ctx.clearRect(0, 0, 800, 600);
+    }
+  }
 }

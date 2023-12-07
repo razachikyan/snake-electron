@@ -1,12 +1,13 @@
 import { TSnakeBody, Entity, Directions } from "../types";
-import { detectCollision } from "../utils/detectCollision";
+import { GameModel } from "./GameModel";
 
-export class Snake {
+export class Snake extends GameModel {
   private body: TSnakeBody;
   private direction: Directions;
   private headPosition: Entity;
 
   constructor(initialX: number, initialY: number) {
+    super();
     this.body = [{ x: initialX, y: initialY, height: 20, width: 20 }];
     this.direction = Directions.right;
     this.headPosition = { x: initialX, y: initialY, height: 20, width: 20 };
@@ -52,7 +53,7 @@ export class Snake {
     this.body.push(newSegment);
   }
 
-  public changeDirection(newDirection: Directions): void {
+  public changeDirection(newDirection: keyof typeof Directions): void {
     if (Directions[newDirection]) {
       this.direction = Directions[newDirection] as Directions;
     } else {
@@ -60,17 +61,12 @@ export class Snake {
     }
   }
 
-  // public checkCollision(): boolean {
-  //   for (let i = 1; i < this.body.length; i++) {
-  //     if (detectCollision(this.body[0], this.body)) {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
+  public getHeadEntity(): Entity[] {
+    return this.body.map((item) => ({ ...item, type: "snake" }));
+  }
 
-  public getPosition(): Entity[] {
-    return this.body;
+  public getBodyEntity(): Entity[] {
+    return this.body.map((item) => ({ ...item, type: "obstacle" }));
   }
 
   public render(ctx: CanvasRenderingContext2D): void {

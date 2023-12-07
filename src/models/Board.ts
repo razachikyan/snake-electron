@@ -1,8 +1,11 @@
-export class Board {
+import { GameModel } from "./GameModel";
+
+export class Board extends GameModel {
   private readonly width: number;
   private readonly height: number;
 
   constructor(width: number, height: number) {
+    super();
     this.width = width;
     this.height = height;
   }
