@@ -6,7 +6,7 @@
 width="50" src="https://upload.wikimedia.org/wikipedia/commons/9/91/Electron_Software_Framework_Logo.svg" /></a>
 </p>
 
-<h3 align="center">Patterns</h3>
+<h2 align="center">Patterns</h2>
 
 
 
