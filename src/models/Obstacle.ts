@@ -18,4 +18,8 @@ export class Obstacle {
       height: this.height,
     };
   }
+
+  public render(ctx: CanvasRenderingContext2D): void {
+    ctx.fillRect(this.x, this.y, this.width, this.height);
+  }
 }

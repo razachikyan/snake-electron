@@ -1,44 +1,38 @@
+import { BrowserWindow } from "electron";
+
 import { Snake } from "../models/Snake";
 import { Board } from "../models/Board";
-// controllers/GameController.ts
-import { BrowserWindow } from "electron";
-import { GameStateManager } from "../models/GameStateManager";
+import { Food } from "../models/Food";
+
 import { GameView } from "../views/GameView";
+import { GameObjectFactory } from "../factories/GameObjectFactory";
 
 export class GameController {
-  private gameStateManager: GameStateManager;
-  private gameView: GameView;
+  // private gameView: GameView;
   private snake: Snake;
   private board: Board;
+  private food: Food;
 
   constructor(private mainWindow: BrowserWindow) {
-    this.gameStateManager = new GameStateManager();
-    this.snake = this.gameStateManager.getSnake(); // Retrieve the Snake instance
-    this.board = this.gameStateManager.getBoard(); // Retrieve the Board instance
-    this.gameView = new GameView(mainWindow, this.gameStateManager);
+    this.snake = GameObjectFactory.createSnake();
+    this.board = GameObjectFactory.createBoard(800, 600);
+    this.food = GameObjectFactory.createFood();
+    // this.gameView = new GameView(mainWindow, this.gameStateManager);
   }
   startGame() {
-    // Initialize game logic, start rendering, etc.
     this.gameStateManager.startGame();
-    this.gameView.render(); // Initial rendering
-    this.startRendering(); // Start the continuous rendering loop
+    this.gameView.render();
+    this.startRendering();
   }
 
   private startRendering() {
-    // Continuously render the game elements
     const renderLoop = () => {
-      // Clear previous frame
-      // ...
+      this.board.render(this.gameView.getContext());
+      this.snake.render(this.gameView.getContext());
 
-      // Render board and snake
-      this.board.render(this.gameView.getContext()); // Pass context or required data
-      this.snake.render(this.gameView.getContext()); // Pass context or required data
-
-      // Request the next frame
       requestAnimationFrame(renderLoop);
     };
 
-    // Start the rendering loop
     requestAnimationFrame(renderLoop);
   }
   initializeKeyHandlers() {

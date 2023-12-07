@@ -2,27 +2,28 @@
 import { Snake } from "../models/Snake";
 import { Food } from "../models/Food";
 import { Obstacle } from "../models/Obstacle";
+import { Board } from "../models/Board";
 export class GameObjectFactory {
-  createSnake(): Snake {
-    // Create and return a Snake object
-    return new Snake(0, 0);
+  static createSnake(): Snake {
+    return new Snake(200, 200);
   }
 
-  createFood(): Food {
-    // Create and return a Food object
+  static createFood(): Food {
     return new Food();
   }
+  static createBoard(width: number, height: number): Board {
+    return new Board(width, height);
+  }
 
-  createObstacle(count: number): Obstacle[] {
+  static createObstacle(count: number): Obstacle[] {
     const obstacles: Obstacle[] = [];
     for (let i = 0; i < count; ++i) {
-      const position = Math.random() * 800;
-      const size = (Math.random() * 10 + 1) * 10;
+      const position = Math.random() * 700 + 50;
+      const width = (Math.ceil(Math.random() * 10) + 1) * 5;
+      const height = (Math.ceil(Math.random() * 10) + 1) * 20;
 
-      obstacles.push(new Obstacle(position, position, size, size));
+      obstacles.push(new Obstacle(position, position, width, height));
     }
-    // Create and return an Obstacle object
-    // return new Obstacle()
     return obstacles;
   }
 }

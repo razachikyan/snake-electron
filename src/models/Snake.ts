@@ -5,13 +5,11 @@ export class Snake {
   private body: TSnakeBody;
   private direction: Directions;
   private headPosition: Entity;
-  private length: number;
 
   constructor(initialX: number, initialY: number) {
     this.body = [{ x: initialX, y: initialY, height: 20, width: 20 }];
     this.direction = Directions.right;
     this.headPosition = { x: initialX, y: initialY, height: 20, width: 20 };
-    this.length = 1;
   }
 
   public move(): void {
@@ -38,6 +36,7 @@ export class Snake {
       height: 20,
       width: 20,
     };
+
     this.body.unshift(newHead);
     this.body.pop();
   }
@@ -61,27 +60,24 @@ export class Snake {
     }
   }
 
-  public checkCollision(): boolean {
-    for (let i = 1; i < this.body.length; i++) {
-      if (detectCollision(this.body[0], this.body[i])) {
-        return true;
-      }
-    }
-    return false;
+  // public checkCollision(): boolean {
+  //   for (let i = 1; i < this.body.length; i++) {
+  //     if (detectCollision(this.body[0], this.body)) {
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // }
+
+  public getPosition(): Entity[] {
+    return this.body;
   }
 
-  public render(context: CanvasRenderingContext2D): void {
-    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-
-    context.fillStyle = "green";
+  public render(ctx: CanvasRenderingContext2D): void {
+    ctx.fillStyle = "green";
 
     this.body.forEach((segment) => {
-      context.fillRect(
-        segment.x * segment.width,
-        segment.y * segment.height,
-        segment.width,
-        segment.height
-      );
+      ctx.fillRect(segment.x, segment.y, segment.width, segment.height);
     });
   }
 }

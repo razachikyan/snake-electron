@@ -1,6 +1,5 @@
 export type TSnakeBody = Array<Entity>;
 
-
 export enum Directions {
   up = "up",
   right = "right",
@@ -13,4 +12,10 @@ export interface Entity {
   y: number;
   width: number;
   height: number;
+  type?: "snake" | "food" | "obstacle";
+}
+
+export interface CollisionResult {
+  collision: boolean;
+  action: "grow" | "die" | "none";
 }

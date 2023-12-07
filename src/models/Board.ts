@@ -6,10 +6,8 @@ export class Board {
     this.width = width;
     this.height = height;
   }
-  render(context: CanvasRenderingContext2D): void {
-    // Rendering logic for the game board
 
-    // For example, drawing a border or background
+  public render(context: CanvasRenderingContext2D): void {
     context.fillStyle = "black";
     context.fillRect(0, 0, this.width, this.height);
   }
