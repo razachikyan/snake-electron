@@ -1,4 +1,4 @@
-<h1 align="center">Snake 🐍</h1>
+<h1 align="center">🎮Snake 🐍</h1>
 
 <h3 align="center">Snake Game wtitten in TypeScript and ElectronJS</h4>
 <p align="center">
