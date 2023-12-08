@@ -5,7 +5,7 @@ import { Obstacle } from "../models/Obstacle";
 import { Board } from "../models/Board";
 export class GameObjectFactory {
   static createSnake(): Snake {
-    return new Snake(200, 200);
+    return Snake.getInstance(200, 200);
   }
 
   static createFood(): Food {

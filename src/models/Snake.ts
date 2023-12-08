@@ -5,12 +5,19 @@ export class Snake extends GameModel {
   private body: TSnakeBody;
   private direction: Directions;
   private headPosition: Entity;
+  private static instance: Snake | undefined;
+  static a: string;
 
-  constructor(initialX: number, initialY: number) {
+  private constructor(initialX: number, initialY: number) {
     super();
     this.body = [{ x: initialX, y: initialY, height: 20, width: 20 }];
     this.direction = Directions.right;
     this.headPosition = { x: initialX, y: initialY, height: 20, width: 20 };
+  }
+
+  public static getInstance(initialX: number, initialY: number): Snake {
+    if (!this.instance) this.instance = new Snake(initialX, initialY);
+    return this.instance;
   }
 
   public move(): void {
