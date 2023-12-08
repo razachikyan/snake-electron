@@ -1,5 +1,3 @@
-import { BrowserWindow } from "electron";
-
 import { Snake } from "../models/Snake";
 import { Board } from "../models/Board";
 import { Food } from "../models/Food";

@@ -13,7 +13,7 @@ export class GameView {
   public render() {
     if (this.ctx !== null) {
       this.clear();
-      this.models.forEach((model) => {
+      this.models.forEach((model: GameModel) => {
         model.render(this.ctx as CanvasRenderingContext2D);
       });
     }

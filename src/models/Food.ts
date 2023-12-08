@@ -33,7 +33,7 @@ export class Food extends GameModel {
     };
   };
 
-  private changePosition(): void {
+  public changePosition(): void {
     this.x = Math.random() * 700 + 50;
     this.y = Math.random() * 700 + 50;
   }
