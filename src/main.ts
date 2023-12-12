@@ -18,7 +18,7 @@ function createWindow() {
     mainWindow = null;
   });
 
-  const gameController = new GameController(1);
+  const gameController = new GameController(1, mainWindow);
   gameController.startGame();
 }
 
