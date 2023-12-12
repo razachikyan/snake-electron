@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npx tsc && npm run copy-html && electron dist/main.js ",
     "dev": "npx tsc -w && electron dist/main.js",
-    "copy-html": "copyfiles index.html dist"
+    "copy-html": "npx copyfiles index.html dist"
   },
   "keywords": [],
   "author": "",
