@@ -1,4 +1,4 @@
-import { globalShortcut, BrowserWindow } from "electron";
+import { BrowserWindow } from "electron";
 
 import { Snake } from "../models/Snake";
 import { Board } from "../models/Board";
@@ -15,10 +15,10 @@ export class GameController {
   private food: Food;
   private obstacles: Obstacle[];
   private intervalKey: NodeJS.Timeout | null;
-  private gameView: GameView;
   private mainWindow: BrowserWindow;
+  private gameView: GameView;
 
-  constructor(mainWindow: BrowserWindow, level: number) {
+  constructor(level: number, mainWindow: BrowserWindow) {
     this.snake = GameObjectFactory.createSnake();
     this.board = GameObjectFactory.createBoard(800, 600);
     this.food = GameObjectFactory.createFood();
@@ -26,7 +26,9 @@ export class GameController {
     this.obstacles = GameObjectFactory.createObstacle(level);
     this.gameView = new GameView([this.board, this.snake, ...this.obstacles]);
     this.mainWindow = mainWindow;
+    this.gameView = new GameView([]);
   }
+
   public startGame() {
     this.intervalKey = setInterval(() => {
       if (
@@ -39,6 +41,7 @@ export class GameController {
       }
 
       this.gameView.render();
+      this.initializeKeyHandlers();
     }, 400);
   }
 
@@ -47,28 +50,27 @@ export class GameController {
   }
 
   private initializeKeyHandlers() {
-    globalShortcut.register("ArrowUp", () => {
-      this.mainWindow.webContents.executeJavaScript(
-        'this.snake.changeDirection("up")'
-      );
-    });
-
-    globalShortcut.register("ArrowDown", () => {
-      this.mainWindow.webContents.executeJavaScript(
-        'snake.changeDirection("down");'
-      );
-    });
-
-    globalShortcut.register("ArrowLeft", () => {
-      this.mainWindow.webContents.executeJavaScript(
-        'snake.changeDirection("left");'
-      );
-    });
-
-    globalShortcut.register("ArrowRight", () => {
-      this.mainWindow.webContents.executeJavaScript(
-        'snake.changeDirection("right");'
-      );
+    this.mainWindow.webContents.on("before-input-event", (ev, action) => {
+      switch (action.key) {
+        case "ArrowUp":
+          ev.preventDefault();
+          this.snake.changeDirection("up");
+          break;
+        case "ArrowDown":
+          ev.preventDefault();
+          this.snake.changeDirection("down");
+          break;
+        case "ArrowLeft":
+          ev.preventDefault();
+          this.snake.changeDirection("left");
+          break;
+        case "ArrowRight":
+          ev.preventDefault();
+          this.snake.changeDirection("right");
+          break;
+        default:
+          break;
+      }
     });
   }
 }

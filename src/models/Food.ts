@@ -4,26 +4,26 @@ import { GameModel } from "./GameModel";
 export class Food extends GameModel {
   private x: number;
   private y: number;
-  private width: number;
-  private height: number;
+  private rad: number;
 
   constructor(size: number = 20) {
     super();
     this.x = Math.random() + 700 + 50;
     this.y = Math.random() + 700 + 50;
-    this.width = size;
-    this.height = size;
+    this.rad = size / 2;
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    ctx.fillStyle = "red";
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.rad / 2, 0, 2 * Math.PI, false);
+    ctx.fill();
+    ctx.closePath();
   }
 
   public getEntity = (): Entity => {
     return {
-      height: this.height,
-      width: this.width,
+      height: this.rad * 2,
+      width: this.rad * 2,
       x: this.x,
       y: this.y,
       type: "food",

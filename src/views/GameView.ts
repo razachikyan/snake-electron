@@ -6,8 +6,9 @@ export class GameView {
   private models: Array<GameModel>;
   constructor(models: GameModel[]) {
     this.models = models;
-    const canvas: HTMLCanvasElement | null = document.querySelector("canvas");
-    canvas ? (this.ctx = canvas.getContext("2d")) : (this.ctx = null);
+    // const canvas: HTMLCanvasElement | null = document.querySelector("canvas");
+    // canvas ? (this.ctx = canvas.getContext("2d")) :
+    this.ctx = null;
   }
 
   public render() {
