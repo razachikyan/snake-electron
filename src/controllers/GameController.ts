@@ -19,30 +19,29 @@ export class GameController {
   private gameView: GameView;
 
   constructor(level: number, mainWindow: BrowserWindow) {
+    this.mainWindow = mainWindow;
     this.snake = GameObjectFactory.createSnake();
     this.board = GameObjectFactory.createBoard(800, 600);
     this.food = GameObjectFactory.createFood();
     this.intervalKey = null;
     this.obstacles = GameObjectFactory.createObstacle(level);
-    this.gameView = new GameView([this.board, this.snake, ...this.obstacles]);
-    this.mainWindow = mainWindow;
-    this.gameView = new GameView([]);
+    this.gameView = new GameView([this.board])//, this.snake, ...this.obstacles]);
+    this.gameView.initCanvas()
   }
 
   public startGame() {
-    this.intervalKey = setInterval(() => {
-      if (
-        detectCollision(this.snake, [
-          ...this.obstacles.map((item) => item.getEntity()),
-          this.food.getEntity(),
-        ])
-      ) {
-        this.stop();
-      }
+    // this.intervalKey = setInterval(() => {
+    //   const x = detectCollision(this.snake, [
+    //     ...this.obstacles.map((item) => item.getEntity()),
+    //     this.food.getEntity(),
+    //   ]);
 
-      this.gameView.render();
-      this.initializeKeyHandlers();
-    }, 400);
+    //   if (x.collision) {
+    //     this.stop();
+    //   }
+    //   this.initializeKeyHandlers();
+    // }, 400);
+    // this.gameView.render();
   }
 
   private stop() {

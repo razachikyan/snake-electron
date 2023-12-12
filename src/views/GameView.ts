@@ -1,18 +1,27 @@
 import { GameModel } from "../models/GameModel";
 
-// views/GameView.ts
 export class GameView {
   private ctx: CanvasRenderingContext2D | null;
   private models: Array<GameModel>;
+
   constructor(models: GameModel[]) {
     this.models = models;
-    // const canvas: HTMLCanvasElement | null = document.querySelector("canvas");
-    // canvas ? (this.ctx = canvas.getContext("2d")) :
     this.ctx = null;
   }
 
-  public render() {
+  public initCanvas(): void {
+    // document.addEventListener('DOMContentLoaded', () => {
+    //   const canvas: HTMLCanvasElement | null = document.querySelector("canvas");
+    //   this.ctx = canvas ? canvas.getContext("2d") : null;
+    //   if (this.ctx) {
+    //     console.log("Canvas initialized");
+    //   }
+    // });
+  }
+
+  public render(): void {
     if (this.ctx !== null) {
+      console.log("rendering");
       this.clear();
       this.models.forEach((model: GameModel) => {
         model.render(this.ctx as CanvasRenderingContext2D);
@@ -20,7 +29,7 @@ export class GameView {
     }
   }
 
-  private clear() {
+  private clear(): void {
     if (this.ctx !== null) {
       this.ctx.clearRect(0, 0, 800, 600);
     }
