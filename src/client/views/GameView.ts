@@ -10,13 +10,13 @@ export class GameView {
   }
 
   public initCanvas(): void {
-    // document.addEventListener('DOMContentLoaded', () => {
-    //   const canvas: HTMLCanvasElement | null = document.querySelector("canvas");
-    //   this.ctx = canvas ? canvas.getContext("2d") : null;
-    //   if (this.ctx) {
-    //     console.log("Canvas initialized");
-    //   }
-    // });
+    document.addEventListener("DOMContentLoaded", () => {
+      const canvas: HTMLCanvasElement | null = document.querySelector("canvas");
+      this.ctx = canvas ? canvas.getContext("2d") : null;
+      if (this.ctx) {
+        console.log("Canvas initialized");
+      }
+    });
   }
 
   public render(): void {

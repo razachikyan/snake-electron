@@ -1,5 +1,3 @@
-import { BrowserWindow } from "electron";
-
 import { Snake } from "../models/Snake";
 import { Board } from "../models/Board";
 import { Food } from "../models/Food";
@@ -15,33 +13,30 @@ export class GameController {
   private food: Food;
   private obstacles: Obstacle[];
   private intervalKey: NodeJS.Timeout | null;
-  private mainWindow: BrowserWindow;
   private gameView: GameView;
 
-  constructor(level: number, mainWindow: BrowserWindow) {
-    this.mainWindow = mainWindow;
+  constructor(level: number) {
     this.snake = GameObjectFactory.createSnake();
     this.board = GameObjectFactory.createBoard(800, 600);
     this.food = GameObjectFactory.createFood();
     this.intervalKey = null;
     this.obstacles = GameObjectFactory.createObstacle(level);
-    this.gameView = new GameView([this.board])//, this.snake, ...this.obstacles]);
-    this.gameView.initCanvas()
+    this.gameView = new GameView([this.board, this.snake, ...this.obstacles]);
+    this.gameView.initCanvas();
   }
 
   public startGame() {
-    // this.intervalKey = setInterval(() => {
-    //   const x = detectCollision(this.snake, [
-    //     ...this.obstacles.map((item) => item.getEntity()),
-    //     this.food.getEntity(),
-    //   ]);
-
-    //   if (x.collision) {
-    //     this.stop();
-    //   }
-    //   this.initializeKeyHandlers();
-    // }, 400);
-    // this.gameView.render();
+    this.initializeKeyHandlers();
+    this.intervalKey = setInterval(() => {
+      const { collision, action } = detectCollision(this.snake, [
+        ...this.obstacles.map((item) => item.getEntity()),
+        this.food.getEntity(),
+      ]);
+      if (collision && action === "die") {
+        this.stop();
+      }
+      this.gameView.render();
+    }, 500);
   }
 
   private stop() {
@@ -49,8 +44,8 @@ export class GameController {
   }
 
   private initializeKeyHandlers() {
-    this.mainWindow.webContents.on("before-input-event", (ev, action) => {
-      switch (action.key) {
+    document.addEventListener("keydown", (ev) => {
+      switch (ev.key) {
         case "ArrowUp":
           ev.preventDefault();
           this.snake.changeDirection("up");

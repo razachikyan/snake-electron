@@ -2,18 +2,10 @@
   "compilerOptions": {
     "moduleResolution": "NodeNext",
     "module": "NodeNext",
-    "target": "ESNext", 
+    "target": "ES5", 
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
   },
-  // "include": [
-  //   "src/**/*.ts",
-  //   "src/**/*.tsx",
-  //   "src/**/*.html"
-  // ],
-  // "exclude": [
-  //   "node_modules"
-  // ]
 }
