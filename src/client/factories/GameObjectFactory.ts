@@ -18,7 +18,7 @@ export class GameObjectFactory {
   static createObstacle(count: number): Obstacle[] {
     const obstacles: Obstacle[] = [];
     for (let i = 0; i < count; ++i) {
-      const position = Math.random() * 700 + 50;
+      const position = Math.random() * 400 + 50;
       const width = (Math.ceil(Math.random() * 10) + 1) * 5;
       const height = (Math.ceil(Math.random() * 10) + 1) * 20;
 

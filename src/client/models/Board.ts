@@ -11,7 +11,7 @@ export class Board extends GameModel {
   }
 
   public render(context: CanvasRenderingContext2D): void {
-    context.fillStyle = "black";
+    context.fillStyle = "green";
     context.fillRect(0, 0, this.width, this.height);
   }
 }

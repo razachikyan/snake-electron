@@ -5,7 +5,7 @@ export class Food extends GameModel {
   private x: number;
   private y: number;
   private rad: number;
-  private colors: string[] = ["green", "yellow", "lightgreen", "orange"];
+  private colors: string[] = ["yellow", "lightgreen", "orange"];
   private color: string;
 
   constructor(size: number = 20) {

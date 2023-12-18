@@ -21,7 +21,12 @@ export class GameController {
     this.food = GameObjectFactory.createFood();
     this.intervalKey = null;
     this.obstacles = GameObjectFactory.createObstacle(level);
-    this.gameView = new GameView([this.board, this.snake, ...this.obstacles]);
+    this.gameView = new GameView([
+      this.board,
+      this.food,
+      this.snake,
+      ...this.obstacles,
+    ]);
     this.gameView.initCanvas();
   }
 

@@ -25,13 +25,13 @@ export class Snake extends GameModel {
     switch (this.direction) {
       case Directions.up:
         if (this.headPosition.y === 0) {
-          this.headPosition.y = Number(process.env.BOARD_SIZE);
+          this.headPosition.y = Number(500);
           break;
         }
         this.headPosition.y -= 20;
         break;
       case Directions.down:
-        if (this.headPosition.y === Number(process.env.BOARD_SIZE)) {
+        if (this.headPosition.y === Number(500)) {
           this.headPosition.y = 0;
           break;
         }
@@ -39,13 +39,13 @@ export class Snake extends GameModel {
         break;
       case Directions.left:
         if (this.headPosition.x === 0) {
-          this.headPosition.x = Number(process.env.BOARD_SIZE);
+          this.headPosition.x = Number(500);
           break;
         }
         this.headPosition.x -= 20;
         break;
       case Directions.right:
-        if (this.headPosition.x === Number(process.env.BOARD_SIZE)) {
+        if (this.headPosition.x === Number(500)) {
           this.headPosition.x = 0;
           break;
         }
@@ -109,7 +109,8 @@ export class Snake extends GameModel {
 
   public render(ctx: CanvasRenderingContext2D): void {
     this.body.forEach((segment, i) => {
-      ctx.fillStyle = this.colors[i%2];
+      ctx.fillStyle = "black";
+      if (i !== 0) ctx.fillStyle = this.colors[i % 2];
       ctx.fillRect(segment.x, segment.y, segment.width, segment.height);
     });
   }
