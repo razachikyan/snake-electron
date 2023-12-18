@@ -27,6 +27,7 @@ export class GameController {
 
   public startGame() {
     this.initializeKeyHandlers();
+    this.gameView.initCanvas();
     this.intervalKey = setInterval(() => {
       const { collision, action } = detectCollision(this.snake, [
         ...this.obstacles.map((item) => item.getEntity()),
