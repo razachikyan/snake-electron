@@ -1,25 +1,20 @@
 import { app, BrowserWindow } from "electron";
-import { GameController } from "./controllers/GameController";
-
 let mainWindow: BrowserWindow | null;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
     webPreferences: {
       nodeIntegration: true,
     },
+    width: 500,
+    height: 500,
   });
 
-  mainWindow.loadFile("index.html");
+  mainWindow.loadFile("menu.html");
 
   mainWindow.on("closed", () => {
     mainWindow = null;
   });
-
-  const gameController = new GameController(1, mainWindow);
-  gameController.startGame();
 }
 
 app.whenReady().then(createWindow);
