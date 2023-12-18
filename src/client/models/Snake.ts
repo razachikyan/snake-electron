@@ -6,6 +6,7 @@ export class Snake extends GameModel {
   private direction: Directions;
   private headPosition: Entity;
   private static instance: Snake | undefined;
+  private colors: string[] = ["red", "yellow"];
   static a: string;
 
   private constructor(initialX: number, initialY: number) {
@@ -25,7 +26,7 @@ export class Snake extends GameModel {
       case Directions.up:
         if (this.headPosition.y === 0) {
           this.headPosition.y = Number(process.env.BOARD_SIZE);
-          break
+          break;
         }
         this.headPosition.y -= 20;
         break;
@@ -107,9 +108,8 @@ export class Snake extends GameModel {
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    ctx.fillStyle = "green";
-
-    this.body.forEach((segment) => {
+    this.body.forEach((segment, i) => {
+      ctx.fillStyle = this.colors[i%2];
       ctx.fillRect(segment.x, segment.y, segment.width, segment.height);
     });
   }

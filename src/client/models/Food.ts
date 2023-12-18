@@ -5,7 +5,7 @@ export class Food extends GameModel {
   private x: number;
   private y: number;
   private rad: number;
-  private colors: string[] = ["red", "yellow", "lightgreen", "orange"];
+  private colors: string[] = ["green", "yellow", "lightgreen", "orange"];
   private color: string;
 
   constructor(size: number = 20) {
@@ -13,7 +13,7 @@ export class Food extends GameModel {
     this.x = Math.random() * 400 + 50;
     this.y = Math.random() * 400 + 50;
     this.rad = size / 2;
-    this.color = this.colors[Math.floor(Math.random()) * this.colors.length];
+    this.color = this.colors[Math.floor(Math.random() * this.colors.length)];
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
