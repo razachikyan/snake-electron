@@ -25,7 +25,7 @@ export class GameView {
 
   private clear(): void {
     if (this.ctx !== null) {
-      this.ctx.clearRect(0, 0, 800, 600);
+      this.ctx.clearRect(0, 0, 500, 500);
     }
   }
 }

@@ -5,26 +5,24 @@ export const detectCollision = (
   snake: Snake,
   obstacles: Entity[]
 ): CollisionResult => {
+  obstacles.concat(snake.getBodyEntity().slice(1));
+  const {
+    height: snakeHeight,
+    width: snakeWidth,
+    x: snakeX,
+    y: snakeY,
+  } = snake.getHeadEntity()[0];
   for (const obstacle of obstacles) {
-    const {
-      height: snakeHeight,
-      width: snakeWidth,
-      x: snakeX,
-      y: snakeY,
-    } = snake.getHeadEntity()[0];
-
-    obstacles.concat(snake.getBodyEntity().slice(1));
-
     const leftObstacle = obstacle.x;
     const rightObstacle = obstacle.x + obstacle.width;
     const topObstacle = obstacle.y;
     const bottomObstacle = obstacle.y + obstacle.height;
 
     if (
-      snakeX < rightObstacle &&
-      snakeX + snakeWidth > leftObstacle &&
-      snakeY < bottomObstacle &&
-      snakeY + snakeHeight > topObstacle
+      snakeX <= rightObstacle &&
+      snakeX + snakeWidth >= leftObstacle &&
+      snakeY <= bottomObstacle &&
+      snakeY + snakeHeight >= topObstacle
     ) {
       const action = obstacle.type
         ? obstacle.type === "food"

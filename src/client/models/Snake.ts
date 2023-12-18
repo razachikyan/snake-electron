@@ -25,13 +25,13 @@ export class Snake extends GameModel {
     switch (this.direction) {
       case Directions.up:
         if (this.headPosition.y === 0) {
-          this.headPosition.y = Number(500);
+          this.headPosition.y = (500);
           break;
         }
         this.headPosition.y -= 20;
         break;
       case Directions.down:
-        if (this.headPosition.y === Number(500)) {
+        if (this.headPosition.y === (500)) {
           this.headPosition.y = 0;
           break;
         }
@@ -39,13 +39,13 @@ export class Snake extends GameModel {
         break;
       case Directions.left:
         if (this.headPosition.x === 0) {
-          this.headPosition.x = Number(500);
+          this.headPosition.x = (500);
           break;
         }
         this.headPosition.x -= 20;
         break;
       case Directions.right:
-        if (this.headPosition.x === Number(500)) {
+        if (this.headPosition.x === (500)) {
           this.headPosition.x = 0;
           break;
         }

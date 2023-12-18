@@ -1,4 +1,4 @@
 import { GameController } from "./controllers/GameController";
 
-const gameController = new GameController(1);
+const gameController = new GameController(4);
 gameController.startGame();

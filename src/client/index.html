@@ -24,11 +24,36 @@
             margin: 0;
             padding: 0;
         }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, .5);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .window {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+        }
     </style>
 </head>
 
 <body>
     <canvas id="cvs" width="500" height="500"></canvas>
+    <div class="modal">
+        <div class="window">
+            <button onclick="location.reload()">restart</button>
+        </div>
+    </div>
     <script type="module" src="game.js"></script>
 </body>
 

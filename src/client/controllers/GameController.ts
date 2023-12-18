@@ -38,6 +38,7 @@ export class GameController {
         ...this.obstacles.map((item) => item.getEntity()),
         this.food.getEntity(),
       ]);
+      console.log({ collision, action });
       if (collision && action === "die") {
         this.stop();
       }
@@ -52,6 +53,10 @@ export class GameController {
 
   private stop() {
     if (this.intervalKey) clearInterval(this.intervalKey);
+    const modal = document.querySelector(".modal") as unknown as HTMLDivElement
+    console.log(modal);
+    if(modal) modal.style.display = "flex"
+    
   }
 
   private initializeKeyHandlers() {
