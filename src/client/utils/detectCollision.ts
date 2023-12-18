@@ -13,7 +13,7 @@ export const detectCollision = (
       y: snakeY,
     } = snake.getHeadEntity()[0];
 
-    obstacles.concat(snake.getBodyEntity());
+    obstacles.concat(snake.getBodyEntity().slice(1));
 
     const leftObstacle = obstacle.x;
     const rightObstacle = obstacle.x + obstacle.width;

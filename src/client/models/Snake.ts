@@ -23,16 +23,32 @@ export class Snake extends GameModel {
   public move(): void {
     switch (this.direction) {
       case Directions.up:
-        this.headPosition.y -= 1;
+        if (this.headPosition.y === 0) {
+          this.headPosition.y = Number(process.env.BOARD_SIZE);
+          break
+        }
+        this.headPosition.y -= 20;
         break;
       case Directions.down:
-        this.headPosition.y += 1;
+        if (this.headPosition.y === Number(process.env.BOARD_SIZE)) {
+          this.headPosition.y = 0;
+          break;
+        }
+        this.headPosition.y += 20;
         break;
       case Directions.left:
-        this.headPosition.x -= 1;
+        if (this.headPosition.x === 0) {
+          this.headPosition.x = Number(process.env.BOARD_SIZE);
+          break;
+        }
+        this.headPosition.x -= 20;
         break;
       case Directions.right:
-        this.headPosition.x += 1;
+        if (this.headPosition.x === Number(process.env.BOARD_SIZE)) {
+          this.headPosition.x = 0;
+          break;
+        }
+        this.headPosition.x += 20;
         break;
       default:
         break;
@@ -62,6 +78,20 @@ export class Snake extends GameModel {
 
   public changeDirection(newDirection: keyof typeof Directions): void {
     if (Directions[newDirection]) {
+      if (this.direction === Directions.down && newDirection === Directions.up)
+        return;
+      if (this.direction === Directions.up && newDirection === Directions.down)
+        return;
+      if (
+        this.direction === Directions.left &&
+        newDirection === Directions.right
+      )
+        return;
+      if (
+        this.direction === Directions.right &&
+        newDirection === Directions.left
+      )
+        return;
       this.direction = Directions[newDirection] as Directions;
     } else {
       console.error("Invalid direction:", newDirection);

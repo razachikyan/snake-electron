@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "npm run build && electron dist/main.js ",
+    "start": "electron dist/main.js ",
     "build": "webpack --mode=production && npm run copy-html",
     "copy-html": "npx copyfiles --up 2 src/client/index.html src/client/menu.html dist"
   },

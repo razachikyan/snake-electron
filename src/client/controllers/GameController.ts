@@ -17,7 +17,7 @@ export class GameController {
 
   constructor(level: number) {
     this.snake = GameObjectFactory.createSnake();
-    this.board = GameObjectFactory.createBoard(800, 600);
+    this.board = GameObjectFactory.createBoard(500, 500);
     this.food = GameObjectFactory.createFood();
     this.intervalKey = null;
     this.obstacles = GameObjectFactory.createObstacle(level);
@@ -36,8 +36,13 @@ export class GameController {
       if (collision && action === "die") {
         this.stop();
       }
+      if (collision && action === "grow") {
+        this.snake.grow();
+        this.food.changePosition();
+      }
+      this.snake.move();
       this.gameView.render();
-    }, 500);
+    }, 300);
   }
 
   private stop() {
