@@ -6,6 +6,8 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
     },
+    width: 500,
+    height: 500,
   });
 
   mainWindow.loadFile("menu.html");

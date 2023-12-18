@@ -12,13 +12,53 @@
             font-family: serif;
             margin: 0;
             padding: 0;
+            overflow: hidden;
         }
-
+        h1,
+        h2,
+        h3 {
+            margin: 0;
+            padding: 0;
+        }
         .container {
-            background-color: darkblue;
-            color: wheat;
+            background-color: rgb(119, 22, 163);
             width: 100vw;
             height: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu {
+            background-color: rgb(91, 9, 129);
+            color: wheat;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            justify-content: center;
+            align-items: center;
+            padding: 50px;
+        }
+
+        a {
+            display: inline-block;
+            font-weight: bold;
+            color: wheat;
+            text-decoration: none;
+            font-size: 22px;
+            padding: 10px 20px;
+            border: 1px solid wheat;
+            border-radius: 3px;
+            transition: all .3s ease;
+        }
+
+        a:hover {
+            background-color: rgb(114, 24, 156)
+        }
+
+        a:active {
+            background-color: rgb(63, 7, 90)
         }
     </style>
 </head>
