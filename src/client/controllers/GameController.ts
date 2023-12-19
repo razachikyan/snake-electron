@@ -48,7 +48,7 @@ export class GameController {
       }
       this.snake.move();
       this.gameView.render();
-    }, 300);
+    }, 100);
   }
 
   private stop() {
