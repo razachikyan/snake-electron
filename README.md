@@ -7,6 +7,10 @@ width="50" src="https://upload.wikimedia.org/wikipedia/commons/9/91/Electron_Sof
 </p>
 
 <h2 align="center">Patterns</h2>
-
+<ul>
+  <li>MVC</li>
+  <li>Factory</li>
+  <li>Singleton</li>
+</ul>
 
 
