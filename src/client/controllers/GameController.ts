@@ -17,11 +17,16 @@ export class GameController {
 
   constructor(level: number) {
     this.snake = GameObjectFactory.createSnake();
-    this.board = GameObjectFactory.createBoard(800, 600);
+    this.board = GameObjectFactory.createBoard(500, 500);
     this.food = GameObjectFactory.createFood();
     this.intervalKey = null;
     this.obstacles = GameObjectFactory.createObstacle(level);
-    this.gameView = new GameView([this.board, this.snake, ...this.obstacles]);
+    this.gameView = new GameView([
+      this.board,
+      this.food,
+      this.snake,
+      ...this.obstacles,
+    ]);
     this.gameView.initCanvas();
   }
 
@@ -33,15 +38,25 @@ export class GameController {
         ...this.obstacles.map((item) => item.getEntity()),
         this.food.getEntity(),
       ]);
+      console.log({ collision, action });
       if (collision && action === "die") {
         this.stop();
       }
+      if (collision && action === "grow") {
+        this.snake.grow();
+        this.food.changePosition();
+      }
+      this.snake.move();
       this.gameView.render();
-    }, 500);
+    }, 100);
   }
 
   private stop() {
     if (this.intervalKey) clearInterval(this.intervalKey);
+    const modal = document.querySelector(".modal") as unknown as HTMLDivElement
+    console.log(modal);
+    if(modal) modal.style.display = "flex"
+    
   }
 
   private initializeKeyHandlers() {

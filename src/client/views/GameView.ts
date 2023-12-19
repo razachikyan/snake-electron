@@ -16,7 +16,6 @@ export class GameView {
 
   public render(): void {
     if (this.ctx !== null) {
-      console.log("rendering");
       this.clear();
       this.models.forEach((model: GameModel) => {
         model.render(this.ctx as CanvasRenderingContext2D);
@@ -26,7 +25,7 @@ export class GameView {
 
   private clear(): void {
     if (this.ctx !== null) {
-      this.ctx.clearRect(0, 0, 800, 600);
+      this.ctx.clearRect(0, 0, 500, 500);
     }
   }
 }

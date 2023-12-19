@@ -6,8 +6,9 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
     },
-    width: 500,
-    height: 500,
+    fullscreen: false,
+    width: 515,
+    height: 555,
   });
 
   mainWindow.loadFile("menu.html");

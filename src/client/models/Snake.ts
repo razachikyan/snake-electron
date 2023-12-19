@@ -6,6 +6,7 @@ export class Snake extends GameModel {
   private direction: Directions;
   private headPosition: Entity;
   private static instance: Snake | undefined;
+  private colors: string[] = ["red", "yellow"];
   static a: string;
 
   private constructor(initialX: number, initialY: number) {
@@ -23,16 +24,32 @@ export class Snake extends GameModel {
   public move(): void {
     switch (this.direction) {
       case Directions.up:
-        this.headPosition.y -= 1;
+        if (this.headPosition.y === 0) {
+          this.headPosition.y = (500);
+          break;
+        }
+        this.headPosition.y -= 20;
         break;
       case Directions.down:
-        this.headPosition.y += 1;
+        if (this.headPosition.y === (500)) {
+          this.headPosition.y = 0;
+          break;
+        }
+        this.headPosition.y += 20;
         break;
       case Directions.left:
-        this.headPosition.x -= 1;
+        if (this.headPosition.x === 0) {
+          this.headPosition.x = (500);
+          break;
+        }
+        this.headPosition.x -= 20;
         break;
       case Directions.right:
-        this.headPosition.x += 1;
+        if (this.headPosition.x === (500)) {
+          this.headPosition.x = 0;
+          break;
+        }
+        this.headPosition.x += 20;
         break;
       default:
         break;
@@ -62,6 +79,20 @@ export class Snake extends GameModel {
 
   public changeDirection(newDirection: keyof typeof Directions): void {
     if (Directions[newDirection]) {
+      if (this.direction === Directions.down && newDirection === Directions.up)
+        return;
+      if (this.direction === Directions.up && newDirection === Directions.down)
+        return;
+      if (
+        this.direction === Directions.left &&
+        newDirection === Directions.right
+      )
+        return;
+      if (
+        this.direction === Directions.right &&
+        newDirection === Directions.left
+      )
+        return;
       this.direction = Directions[newDirection] as Directions;
     } else {
       console.error("Invalid direction:", newDirection);
@@ -77,9 +108,9 @@ export class Snake extends GameModel {
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
-    ctx.fillStyle = "green";
-
-    this.body.forEach((segment) => {
+    this.body.forEach((segment, i) => {
+      ctx.fillStyle = "black";
+      if (i !== 0) ctx.fillStyle = this.colors[i % 2];
       ctx.fillRect(segment.x, segment.y, segment.width, segment.height);
     });
   }

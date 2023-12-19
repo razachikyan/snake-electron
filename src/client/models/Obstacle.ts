@@ -25,6 +25,7 @@ export class Obstacle extends GameModel {
   }
 
   public render(ctx: CanvasRenderingContext2D): void {
+    ctx.fillStyle = "brown";
     ctx.fillRect(this.x, this.y, this.width, this.height);
   }
 }
