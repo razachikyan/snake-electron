@@ -17,4 +17,33 @@ width="50" src="https://upload.wikimedia.org/wikipedia/commons/9/91/Electron_Sof
   <img width="200" height="300" src="./readme-images/image.png">
   <img width="200" height="300" src="./readme-images/image-1.png">
   <img width="200" height="300" src="./readme-images/image-2.png">
+  <img width="200" height="300" src="./readme-images/image-3.png">
 </div>
+
+<h1 align="center">Setup and Get Started</h1>
+
+## Setup
+
+- Clone the repository
+  `git clone https://github.com/razachikyan/snake-electron.git`
+
+- Open the project folder
+  `cd snake-electron`
+
+- Install the dependencies
+  `npm install`
+
+- Build the project
+  `npm run build`
+
+## Get Started
+
+- Run the Game
+  `npm start`
+
+## How to play
+
+### Move the Snake to each as much apples as possible 🍎
+  &#8593;
+&#8592;  &#8594;
+  &#8595;
