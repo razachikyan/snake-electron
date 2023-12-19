@@ -31,6 +31,7 @@ export class GameController {
   }
 
   public startGame() {
+    let foodInterval: NodeJS.Timeout | null = null;
     this.initializeKeyHandlers();
     this.gameView.initCanvas();
     this.intervalKey = setInterval(() => {
@@ -43,8 +44,13 @@ export class GameController {
         this.stop();
       }
       if (collision && action === "grow") {
+        if (foodInterval !== null) clearInterval(foodInterval);
         this.snake.grow();
         this.food.changePosition();
+
+        foodInterval = setInterval(() => {
+          this.food.changePosition();
+        }, 15000);
       }
       this.snake.move();
       this.gameView.render();
@@ -53,10 +59,9 @@ export class GameController {
 
   private stop() {
     if (this.intervalKey) clearInterval(this.intervalKey);
-    const modal = document.querySelector(".modal") as unknown as HTMLDivElement
+    const modal = document.querySelector(".modal") as unknown as HTMLDivElement;
     console.log(modal);
-    if(modal) modal.style.display = "flex"
-    
+    if (modal) modal.style.display = "flex";
   }
 
   private initializeKeyHandlers() {
