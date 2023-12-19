@@ -11,6 +11,11 @@ width="50" src="https://upload.wikimedia.org/wikipedia/commons/9/91/Electron_Sof
   <li>MVC</li>
   <li>Factory</li>
   <li>Singleton</li>
+
+  <img src="">
+  <img src="">
+  <img src=""> 
 </ul>
-
-
+<img width="200" height="300" src="./readme-images/image.png">
+<img width="200" height="300" src="./readme-images/image-1.png">
+<img width="200" height="300" src="./readme-images/image-2.png">
